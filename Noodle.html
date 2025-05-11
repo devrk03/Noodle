@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoodleCraft: Your Guide to Homemade Noodles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111827; /* bg-gray-900 */
+            color: #f3f4f6; /* text-gray-100 */
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior-y: none; /* Prevents bounce on some browsers, helps with scroll animations */
+        }
+
+        .font-title {
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .font-description {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Hero Section Specific Styles */
+        .hero-section {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax-like effect for hero */
+        }
+
+        /* Animation Sections: Designed for sticky content effect */
+        .animation-section {
+            min-height: 250vh; /* Increased height to allow for scroll-driven animation */
+            position: relative;
+            overflow: hidden; /* Clip content that might overflow during sticky transitions */
+        }
+
+        .animation-image-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            z-index: 1;
+        }
+        .animation-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .animation-text-content {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10; /* Above the image */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Allow scroll events to pass through if needed, but text needs to be selectable */
+        }
+        .animation-text-content > div {
+             pointer-events: auto; /* Make inner div interactable */
+        }
+
+
+        /* Text fade-in animation */
+        .fade-in-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-text.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll down indicator */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            transition: opacity 0.5s ease;
+            z-index: 50;
+        }
+
+        .scroll-down-indicator svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Custom scrollbar (optional, for aesthetics) */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #1f2937; /* bg-gray-800 */
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #f59e0b; /* accent-yellow-500 */
+            border-radius: 10px;
+            border: 2px solid #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 bg-gray-900 bg-opacity-50 transition-all duration-300">
+        <div class="container mx-auto flex justify-start items-center">
+            <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleCraft Logo" class="h-12 md:h-16">
+             <h1 class="font-title text-xl md:text-2xl ml-3 text-yellow-400">NoodleCraft</h1>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-section flex flex-col justify-center items-center text-center text-white relative" style="background-image: url('https://i.ibb.co/cKpwxKSH/Gemini-Generated-Image-fb3cywfb3cywfb3c.jpg');">
+        <div class="absolute inset-0 bg-black opacity-40"></div> <div class="relative z-10 p-6">
+            <h1 id="hero-title" class="font-title text-5xl md:text-7xl lg:text-8xl mb-6 text-shadow-lg fade-in-text">Unlock the Secrets to Delicious Homemade Noodles!</h1>
+            <p id="hero-text" class="font-description text-xl md:text-2xl text-gray-200 fade-in-text" style="transition-delay: 0.2s;">Scroll down to start Learning Now</p>
+        </div>
+        <div class="scroll-down-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M5.293 11.293a1 1 0 011.414 0L10 14.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </div>
+    </section>
+
+    <section id="step1" class="animation-section">
+        <div class="animation-image-container">
+            <img id="step1-img" src="https://i.ibb.co/yFsx0YT6/1000069876-0001-0.png" alt="Mixing Eggs Animation Frame">
+        </div>
+        <div class="animation-text-content">
+            <div class="text-content-inner max-w-2xl mx-auto text-center p-8 bg-black bg-opacity-60 rounded-xl shadow-2xl">
+                <h2 class="font-title text-4xl md:text-5xl mb-4 text-yellow-400 fade-in-text">Simple start: Mixing eggs</h2>
+                <p class="font-description text-lg md:text-xl text-gray-200 fade-in-text" style="transition-delay: 0.2s;">Watch as fresh eggs are carefully cracked and whisked together, the first step in creating something delicious. This simple act of combining ingredients is where every great recipe begins!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="step2" class="animation-section">
+        <div class="animation-image-container">
+            <img id="step2-img" src="https://i.ibb.co/hxM4CZy9/1000069946-0001-0.png" alt="Kneading Dough Animation Frame">
+        </div>
+        <div class="animation-text-content">
+            <div class="text-content-inner max-w-2xl mx-auto text-center p-8 bg-black bg-opacity-60 rounded-xl shadow-2xl">
+                <h2 class="font-title text-4xl md:text-5xl mb-4 text-yellow-400 fade-in-text">Dough Magic: Kneading Time</h2>
+                <p class="font-description text-lg md:text-xl text-gray-200 fade-in-text" style="transition-delay: 0.2s;">Observe the transformation as simple ingredients become a smooth, workable dough through gentle kneading. This process develops texture and flavor, the heart of our creation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="step3" class="animation-section">
+        <div class="animation-image-container">
+            <img id="step3-img" src="https://i.ibb.co/6cZXG1gN/1000069966-0001-0.png" alt="Serving Noodles Animation Frame">
+        </div>
+        <div class="animation-text-content">
+            <div class="text-content-inner max-w-2xl mx-auto text-center p-8 bg-black bg-opacity-60 rounded-xl shadow-2xl">
+                <h2 class="font-title text-4xl md:text-5xl mb-4 text-yellow-400 fade-in-text">Plateful of Joy: Serving the Noodles</h2>
+                <p class="font-description text-lg md:text-xl text-gray-200 fade-in-text" style="transition-delay: 0.2s;">The perfectly cooked noodles are twirled and artfully arranged on the plate, ready to be enjoyed. A simple yet satisfying moment, promising a delicious bite!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-gray-400 py-12 text-center">
+        <div class="container mx-auto">
+            <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleCraft Logo" class="h-16 mx-auto mb-4">
+            <p class="mb-2 font-description">&copy; <span id="currentYear"></span> NoodleCraft. All Rights Reserved.</p>
+            <p class="mb-4 font-description">
+                <a href="#" class="hover:text-yellow-400 transition-colors">Privacy Policy</a> | 
+                <a href="#" class="hover:text-yellow-400 transition-colors">Terms of Service</a>
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.028 3.7c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zm0 1.623c-2.387 0-2.691.01-3.615.055c-.926.044-1.449.198-1.805.334a3.288 3.288 0 00-1.182.764 3.288 3.288 0 00-.764 1.182c-.136.356-.29.879-.334 1.805C4.01 8.113 4 8.417 4 10.8s.01 2.688.055 3.615c.044.926.198 1.449.334 1.805a3.288 3.288 0 00.764 1.182 3.288 3.288 0 001.182.764c.356.136.879.29 1.805.334 1.024.048 1.378.06 3.808.06s2.784-.012 3.808-.06c.926-.044 1.449-.198 1.805-.334a3.288 3.288 0 001.182-.764 3.288 3.288 0 00.764-1.182c.136-.356.29-.879.334-1.805.048-1.024.06-1.378.06-3.808s-.012-2.784-.06-3.808c-.044-.926-.198-1.449-.334-1.805a3.288 3.288 0 00-.764-1.182 3.288 3.288 0 00-1.182-.764c-.356-.136-.879-.29-1.805-.334C14.697 3.633 14.403 3.623 12 3.623zM12 7.119c-2.909 0-5.25 2.341-5.25 5.25s2.341 5.25 5.25 5.25 5.25-2.341 5.25-5.25S14.909 7.119 12 7.119zm0 8.878c-1.995 0-3.628-1.633-3.628-3.628s1.633-3.628 3.628-3.628 3.628 1.633 3.628 3.628s-1.633 3.628-3.628 3.628zm4.786-6.763a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+
+            // --- Image Frame Data ---
+            const step1Frames = [
+                "https://i.ibb.co/yFsx0YT6/1000069876-0001-0.png", "https://i.ibb.co/rKFzg0h5/1000069876-0002-0.png", "https://i.ibb.co/0Vq2VBR5/1000069876-0003-0.png", "https://i.ibb.co/h1XWNvH1/1000069876-0004-0.png", "https://i.ibb.co/DfQ97J6M/1000069876-0005-0.png",
+                "https://i.ibb.co/qY6F5Dyf/1000069876-0006-0.png", "https://i.ibb.co/RkqScMG5/1000069876-0007-0.png", "https://i.ibb.co/xKz3hGFM/1000069876-0008-0.png", "https://i.ibb.co/dNkXHqc/1000069876-0009-0.png", "https://i.ibb.co/pr6nP1gQ/1000069876-0010-0.png",
+                "https://i.ibb.co/dssBdpJ3/1000069876-0011-0.png", "https://i.ibb.co/XkfhnrDR/1000069876-0012-0.png", "https://i.ibb.co/pjSJVjk5/1000069876-0013-0.png", "https://i.ibb.co/DHKB9g8n/1000069876-0014-0.png", "https://i.ibb.co/sJ9KVxxY/1000069876-0015-0.png",
+                "https://i.ibb.co/0j1pgyzk/1000069876-0016-0.png", "https://i.ibb.co/9HXpm3D2/1000069876-0017-0.png", "https://i.ibb.co/fYFkKgNX/1000069876-0018-0.png", "https://i.ibb.co/vx9QZmJP/1000069876-0019-0.png", "https://i.ibb.co/jvVhfrPS/1000069876-0020-0.png",
+                "https://i.ibb.co/Q7hHdMsJ/1000069876-0021-0.png", "https://i.ibb.co/cXQHTFfc/1000069876-0022-0.png", "https://i.ibb.co/bjXLR8QR/1000069876-0023-0.png", "https://i.ibb.co/GfmyghB6/1000069876-0024-0.png", "https://i.ibb.co/wNscYdg4/1000069876-0025-0.png",
+                "https://i.ibb.co/1JtTVL5s/1000069876-0026-0.png", "https://i.ibb.co/n8LnK8Gb/1000069876-0027-0.png", "https://i.ibb.co/3mL9J099/1000069876-0028-0.png", "https://i.ibb.co/LhBtd08T/1000069876-0029-0.png", "https://i.ibb.co/gZ7LFstF/1000069876-0030-0.png"
+            ];
+            const step2Frames = [
+                "https://i.ibb.co/hxM4CZy9/1000069946-0001-0.png", "https://i.ibb.co/38BZS8v/1000069946-0002-0.png", "https://i.ibb.co/gsL2HPy/1000069946-0003-0.png", "https://i.ibb.co/SD4gDLQM/1000069946-0004-0.png", "https://i.ibb.co/jP8f6gz4/1000069946-0005-0.png",
+                "https://i.ibb.co/sp2P1gd6/1000069946-0006-0.png", "https://i.ibb.co/BVVvmCFs/1000069946-0007-0.png", "https://i.ibb.co/Tq74k77W/1000069946-0008-0.png", "https://i.ibb.co/0jJtP1BK/1000069946-0009-0.png", "https://i.ibb.co/PZ14sGJx/1000069946-0010-0.png",
+                "https://i.ibb.co/wrjfcR2c/1000069946-0011-0.png", "https://i.ibb.co/LXvctxtG/1000069946-0012-0.png", "https://i.ibb.co/hRmDMYzJ/1000069946-0013-0.png", "https://i.ibb.co/wrNH3MTB/1000069946-0014-0.png", "https://i.ibb.co/QB12MqL/1000069946-0015-0.png",
+                "https://i.ibb.co/V0WbgTCq/1000069946-0016-0.png"
+            ];
+            const step3Frames = [
+                "https://i.ibb.co/6cZXG1gN/1000069966-0001-0.png", "https://i.ibb.co/CkW3SmJ/1000069966-0002-0.png", "https://i.ibb.co/VYM7hbXD/1000069966-0003-0.png", "https://i.ibb.co/Fbwc6ZqQ/1000069966-0004-0.png", "https://i.ibb.co/PskYQP2c/1000069966-0005-0.png",
+                "https://i.ibb.co/spFg9BVS/1000069966-0006-0.png", "https://i.ibb.co/p683JynF/1000069966-0007-0.png", "https://i.ibb.co/VYnwgF5J/1000069966-0008-0.png", "https://i.ibb.co/gF4pypqz/1000069966-0009-0.png", "https://i.ibb.co/3y5DBZR3/1000069966-0010-0.png",
+                "https://i.ibb.co/prnXFMNk/1000069966-0011-0.png", "https://i.ibb.co/tTCwjRty/1000069966-0012-0.png", "https://i.ibb.co/ycQngDZk/1000069966-0013-0.png", "https://i.ibb.co/NdYQz2gq/1000069966-0014-0.png", "https://i.ibb.co/JjvzbLSL/1000069966-0015-0.png",
+                "https://i.ibb.co/hRYLGwZ9/1000069966-0016-0.png", "https://i.ibb.co/dJKL77bQ/1000069966-0017-0.png", "https://i.ibb.co/YmhVHWT/1000069966-0018-0.png", "https://i.ibb.co/H0gFC9Y/1000069966-0019-0.png", "https://i.ibb.co/hRP7TdLQ/1000069966-0020-0.png",
+                "https://i.ibb.co/QvFcPHpx/1000069966-0021-0.png", "https://i.ibb.co/ynSXfTG0/1000069966-0022-0.png", "https://i.ibb.co/q38ZZYrL/1000069966-0023-0.png"
+            ];
+
+            const animationConfigs = [
+                { id: 'step1', imgId: 'step1-img', frames: step1Frames, sectionElement: document.getElementById('step1') },
+                { id: 'step2', imgId: 'step2-img', frames: step2Frames, sectionElement: document.getElementById('step2') },
+                { id: 'step3', imgId: 'step3-img', frames: step3Frames, sectionElement: document.getElementById('step3') }
+            ];
+
+            // --- Preload Images ---
+            function preloadImages(urls, callback) {
+                let loadedCount = 0;
+                const numImages = urls.length;
+                if (numImages === 0) {
+                    if (callback) callback();
+                    return;
+                }
+                urls.forEach(url => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = img.onerror = () => {
+                        loadedCount++;
+                        if (loadedCount === numImages) {
+                            if (callback) callback();
+                        }
+                    };
+                });
+            }
+
+            let allFramesToLoad = [
+                'https://i.ibb.co/cKpwxKSH/Gemini-Generated-Image-fb3cywfb3cywfb3c.jpg', // Hero
+                ...step1Frames, ...step2Frames, ...step3Frames
+            ];
+            preloadImages(allFramesToLoad, () => {
+                console.log("All animation images preloaded");
+                // Could hide a loader here if one was implemented
+            });
+
+
+            // --- Scroll-based Frame Animation ---
+            const windowHeight = window.innerHeight;
+
+            function updateFrameAnimation() {
+                animationConfigs.forEach(config => {
+                    const section = config.sectionElement;
+                    const imgElement = document.getElementById(config.imgId);
+                    if (!section || !imgElement) return;
+
+                    const rect = section.getBoundingClientRect();
+                    
+                    // Calculate scroll progress within the section
+                    // Animation plays as the section scrolls through the viewport
+                    // Progress from 0 when top of section enters bottom of viewport, to 1 when bottom of section leaves top of viewport
+                    // More specifically for sticky effect: progress is how much we've scrolled *within* the section's tall height
+                    // while the content is "sticky".
+                    // rect.top is distance from viewport top to section top.
+                    // When rect.top is 0, section top is at viewport top.
+                    // When rect.top is negative, we are scrolling into the section.
+                    // Total scrollable distance for animation within a tall section: section.offsetHeight - windowHeight
+
+                    const scrollableHeight = section.offsetHeight - windowHeight;
+                    if (scrollableHeight <=0) return; // Section not tall enough for this effect
+
+                    // Progress is how much of the "scrollable excess height" has been scrolled.
+                    // -rect.top is how much the section top has moved above the viewport top.
+                    let progress = (-rect.top) / scrollableHeight;
+                    progress = Math.max(0, Math.min(1, progress)); // Clamp progress between 0 and 1
+
+                    if (rect.top <= 0 && rect.bottom >= windowHeight) { // Section is "active" (top above viewport, bottom below)
+                        // This is the primary condition for the sticky effect's animation period
+                    } else if (rect.bottom < windowHeight && rect.bottom > 0) { // Section is scrolling out of view (bottom part)
+                        progress = 1; // Animation should be at its end
+                    } else if (rect.top > 0 && rect.top < windowHeight) { // Section is scrolling into view (top part)
+                        progress = 0; // Animation should be at its start
+                    }
+
+
+                    const frameIndex = Math.floor(progress * (config.frames.length - 1));
+                    
+                    // Ensure frameIndex is valid
+                    const safeFrameIndex = Math.max(0, Math.min(frameIndex, config.frames.length - 1));
+                    
+                    if (config.frames[safeFrameIndex] && imgElement.src !== config.frames[safeFrameIndex]) {
+                         // Only update src if it's different to prevent flicker & unnecessary loads (though preloading helps)
+                        requestAnimationFrame(() => { // Update in next paint cycle
+                            imgElement.src = config.frames[safeFrameIndex];
+                        });
+                    }
+                });
+            }
+            
+            // --- Intersection Observer for Text Fade-ins ---
+            const textElements = document.querySelectorAll('.fade-in-text');
+            const heroTitle = document.getElementById('hero-title');
+            const heroText = document.getElementById('hero-text');
+
+            // Initial fade-in for hero elements immediately
+            if(heroTitle) heroTitle.classList.add('is-visible');
+            if(heroText) heroText.classList.add('is-visible');
+
+
+            const observerOptions = {
+                root: null, // relative to document viewport
+                rootMargin: '0px',
+                threshold: 0.2 // % of item visible to trigger
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    // For text content within animation sections
+                    const parentAnimationSection = entry.target.closest('.animation-section');
+                    if (parentAnimationSection) {
+                        const rect = parentAnimationSection.getBoundingClientRect();
+                        // Check if the text's sticky position is roughly centered
+                        const textShouldBeVisible = rect.top < windowHeight * 0.3 && rect.bottom > windowHeight * 0.7;
+                        if (textShouldBeVisible) {
+                           entry.target.classList.add('is-visible');
+                        } else {
+                           entry.target.classList.remove('is-visible');
+                        }
+                    } else if (entry.isIntersecting) { // For non-animation section elements (e.g. initial hero items if not handled separately)
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible'); // Optional: re-fade if scrolled out
+                    }
+                });
+            };
+            const textObserver = new IntersectionObserver(observerCallback, observerOptions);
+            textElements.forEach(el => {
+                // Don't observe hero elements again if handled separately for initial load
+                if(el.id !== 'hero-title' && el.id !== 'hero-text') {
+                    textObserver.observe(el);
+                }
+            });
+
+
+            // --- Scroll Event Listener ---
+            const scrollIndicator = document.querySelector('.scroll-down-indicator');
+            const heroSectionHeight = document.getElementById('hero').offsetHeight;
+
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            function onScroll() {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateFrameAnimation();
+                        
+                        // Handle scroll indicator visibility
+                        if (scrollIndicator) {
+                            if (lastScrollY > heroSectionHeight * 0.5) {
+                                scrollIndicator.style.opacity = '0';
+                            } else {
+                                scrollIndicator.style.opacity = '1';
+                            }
+                        }
+                        
+                        // Trigger text fade-in check for animation sections (handled by observer now)
+                        // textElements.forEach(el => {
+                        //     const parentAnimationSection = el.closest('.animation-section');
+                        //     if (parentAnimationSection) {
+                        //         const rect = parentAnimationSection.getBoundingClientRect();
+                        //         const textShouldBeVisible = rect.top < windowHeight * 0.3 && rect.bottom > windowHeight * 0.7;
+                        //         if (textShouldBeVisible) el.classList.add('is-visible');
+                        //         else el.classList.remove('is-visible');
+                        //     }
+                        // });
+
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // Initial call to set up correct frames and text visibility if needed
+            updateFrameAnimation();
+            // Manually trigger observer for any initially visible elements that might be missed
+            textElements.forEach(el => {
+                if (el.id !== 'hero-title' && el.id !== 'hero-text') { // Skip hero as it's handled
+                    const entry = { target: el, isIntersecting: false }; // Simulate an entry
+                    const parentAnimationSection = el.closest('.animation-section');
+                    if (parentAnimationSection) {
+                        const rect = parentAnimationSection.getBoundingClientRect();
+                        const textShouldBeVisible = rect.top < windowHeight * 0.3 && rect.bottom > windowHeight * 0.7;
+                        if (textShouldBeVisible) entry.isIntersecting = true;
+                    }
+                    observerCallback([entry], textObserver);
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
