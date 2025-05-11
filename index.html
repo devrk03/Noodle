@@ -1,113 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-DE_TYPE_PREFIX">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoodleVerse - Craft Your Own Noodles</title>
+    <title>NoodleCraft Scroll - Master Homemade Noodles</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" type="image/png">
 </head>
 <body>
-
     <div id="preloader">
-        <div class="loader-content">
-            <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="Loading Logo" class="loader-logo">
-            <p>Loading NoodleVerse...</p>
-            <div class="progress-bar-container">
-                <div class="progress-bar"></div>
+        <div class="preloader-content">
+            <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleCraft Logo" class="preloader-logo">
+            <p>Preparing Your Noodle Journey...</p>
+            <div class="loading-bar-container">
+                <div id="loading-bar"></div>
             </div>
+            <p id="loading-percentage">0%</p>
         </div>
     </div>
 
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleVerse Logo">
-                <span>NoodleVerse</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#hero" class="nav-link active">Home</a></li>
-                <li><a href="#step1-trigger" class="nav-link">Step I</a></li>
-                <li><a href="#step2-trigger" class="nav-link">Step II</a></li>
-                <li><a href="#step3-trigger" class="nav-link">Step III</a></li>
-            </ul>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+    <div id="main-content" style="display: none;">
+        <header id="navbar">
+            <div class="nav-container">
+                <a href="#" class="nav-logo-link">
+                    <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleCraft Scroll Logo" id="nav-logo">
+                    <span>NoodleCraft Scroll</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#step1-container">Mixing</a></li>
+                        <li><a href="#step2-container">Kneading</a></li>
+                        <li><a href="#step3-container">Serving</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <div id="sequence-container">
-        <canvas id="frame-canvas"></canvas>
-    </div>
-
-    <header id="hero">
-        <div class="hero-content">
-            <h1 class="animate-on-scroll fade-in-up">Unlock the Secrets to Delicious Homemade Noodles!</h1>
-            <p class="animate-on-scroll fade-in-up delay-1">Scroll down to start Learning Now</p>
-        </div>
-        <div class="scroll-down-indicator">
-            <div class="arrow"></div>
-        </div>
-    </header>
-
-    <main>
-        <section id="step1-trigger" class="scroll-trigger-section" data-video-frames="video1Frames" data-frames-count="30">
-            <div class="step-content-wrapper">
-                <div class="step-text-content">
-                    <h2 class="animate-on-scroll fade-in-up">Simple start: Mixing eggs</h2>
-                    <p class="animate-on-scroll fade-in-up delay-1">Watch as fresh eggs are carefully cracked and whisked together, the first step in creating something delicious. This simple act of combining ingredients is where every great recipe begins!</p>
+        <section id="hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Unlock the Secrets to Delicious Homemade Noodles!</h1>
+                <p class="hero-text">Scroll down to start Learning Now</p>
+                <div class="scroll-down-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </section>
 
-        <section id="step2-trigger" class="scroll-trigger-section" data-video-frames="video2Frames" data-frames-count="16">
-             <div class="step-content-wrapper">
-                <div class="step-text-content">
-                    <h2 class="animate-on-scroll fade-in-up">Dough Magic: Kneading Time</h2>
-                    <p class="animate-on-scroll fade-in-up delay-1">Observe the transformation as simple ingredients become a smooth, workable dough through gentle kneading. This process develops texture and flavor, the heart of our creation.</p>
-                </div>
-            </div>
-        </section>
+        <div id="video-scroll-wrapper">
+            <canvas id="scroll-video-canvas"></canvas>
 
-        <section id="step3-trigger" class="scroll-trigger-section" data-video-frames="video3Frames" data-frames-count="23">
-            <div class="step-content-wrapper">
-                <div class="step-text-content">
-                    <h2 class="animate-on-scroll fade-in-up">Plateful of Joy: Serving the Noodles</h2>
-                    <p class="animate-on-scroll fade-in-up delay-1">The perfectly cooked noodles are twirled and artfully arranged on the plate, ready to be enjoyed. A simple yet satisfying moment, promising a delicious bite!</p>
+            <section id="step1-container" class="step-content-container">
+                <div class="step-text-content anim-fade-in">
+                    <h2 class="step-title">Simple start: Mixing eggs</h2>
+                    <p class="step-description">Watch as fresh eggs are carefully cracked and whisked together, the first step in creating something delicious. This simple act of combining ingredients is where every great recipe begins!</p>
                 </div>
-            </div>
-        </section>
-    </main>
-    
-    <section class="final-content-area">
-        <div class="final-text">
-            <h2>Ready to Cook?</h2>
-            <p>You've seen the art, now try the craft. Happy Noodling!</p>
-            <a href="#" class="cta-button">Find Recipes</a>
+            </section>
+
+            <section id="step2-container" class="step-content-container">
+                <div class="step-text-content anim-fade-in">
+                    <h2 class="step-title">Dough Magic: Kneading Time</h2>
+                    <p class="step-description">Observe the transformation as simple ingredients become a smooth, workable dough through gentle kneading. This process develops texture and flavor, the heart of our creation.</p>
+                </div>
+            </section>
+
+            <section id="step3-container" class="step-content-container">
+                <div class="step-text-content anim-fade-in">
+                    <h2 class="step-title">Plateful of Joy: Serving the Noodles</h2>
+                    <p class="step-description">The perfectly cooked noodles are twirled and artfully arranged on the plate, ready to be enjoyed. A simple yet satisfying moment, promising a delicious bite!</p>
+                </div>
+            </section>
         </div>
-    </section>
 
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; <span id="currentYear"></span> NoodleVerse. All Rights Reserved.</p>
+        <footer>
+            <p>&copy; <span id="current-year"></span> NoodleCraft Scroll. All Rights Reserved.</p>
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
             </div>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+            <div class="social-media-icons">
+                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06c0 4.98 3.66 9.12 8.44 9.87v-6.99H7.9v-2.88h2.54V9.57c0-2.52 1.5-3.92 3.8-3.92 1.09 0 2.22.19 2.22.19v2.47h-1.27c-1.24 0-1.62.77-1.62 1.55v1.88h2.78l-.44 2.88h-2.34v6.99C18.34 21.18 22 17.04 22 12.06c0-5.53-4.5-10.02-10-10.02z"/></svg></a>
+                <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.42.47-.65.25-1.23.59-1.77 1.14-.55.55-.89 1.12-1.14 1.77-.25.63-.42 1.36-.47 2.42C2.01 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.42.25.65.59 1.23 1.14 1.77.55.55 1.12.89 1.77 1.14.63.25 1.36.42 2.42.47 1.06.05 1.4.06 4.12.06s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.42-.47.65-.25 1.23-.59 1.77-1.14.55-.55.89-1.12 1.14-1.77.25-.63.42-1.36.47-2.42.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.42-.25-.65-.59-1.23-1.14-1.77-.55-.55-1.12-.89-1.77-1.14-.63-.25-1.36-.42-2.42-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.98.01 4.03.06 1.03.05 1.58.21 1.96.36.49.2.82.49 1.18.84.35.35.64.69.84 1.18.15.38.31.93.36 1.96.05 1.05.06 1.36.06 4.03s-.01 2.98-.06 4.03c-.05 1.03-.21 1.58-.36 1.96-.2.49-.49.82-.84 1.18-.35.35-.69.64-1.18.84-.38.15-.93.31-1.96.36-1.05.05-1.36.06-4.03.06s-2.98-.01-4.03-.06c-1.03-.05-1.58-.21-1.96-.36-.49-.2-.82-.49-1.18-.84-.35-.35-.64-.69-.84-1.18-.15-.38-.31-.93-.36-1.96C4.01 14.98 4 14.67 4 12s.01-2.98.06-4.03c.05-1.03.21-1.58.36-1.96.2-.49.49-.82.84-1.18.35-.35.69-.64 1.18-.84.38-.15.93-.31 1.96-.36C9.02 3.81 9.33 3.8 12 3.8zm0 3.35c-2.67 0-4.85 2.18-4.85 4.85S9.33 16.85 12 16.85s4.85-2.18 4.85-4.85S14.67 7.15 12 7.15zm0 7.9c-1.71 0-3.1-1.39-3.1-3.1s1.39-3.1 3.1-3.1 3.1 1.39 3.1 3.1-1.39 3.1-3.1 3.1zm3.81-8.2c-.59 0-1.07-.48-1.07-1.07s.48-1.07 1.07-1.07 1.07.48 1.07 1.07-.48 1.07-1.07 1.07z"/></svg></a>
+                <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.49-1.75.85-2.72 1.04C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.54v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.94.07c.54 1.7 2.1 2.93 3.96 2.96-1.46 1.14-3.3 1.82-5.3 1.82-.34 0-.68-.02-1.02-.06C3.44 20.29 5.54 21 7.89 21c7.07 0 10.94-5.86 10.94-10.94 0-.17 0-.33-.01-.5.75-.54 1.4-1.22 1.92-1.98z"/></svg></a>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
