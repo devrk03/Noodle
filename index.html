@@ -3,196 +3,709 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoodleMaster</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <title>NoodleNest - Master the Art of Homemade Noodles</title>
     <style>
-        /* Custom animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes scrollIndicator {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(10px); opacity: 0.5; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
         }
-        .animate-fadeInUp {
-            animation: fadeInUp 1s ease-out forwards;
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
         }
-        .animate-scrollIndicator {
-            animation: scrollIndicator 1.5s infinite;
+        
+        header.sticky {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 3rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         }
-        /* Hide scrollbar but keep functionality */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        
+        .logo {
+            height: 50px;
+            transition: all 0.3s ease;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        
+        header.sticky .logo {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: #D1A054;
+            bottom: 0;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .hero {
+            background: url('https://i.ibb.co/cKpwxKSH/Gemini-Generated-Image-fb3cywfb3cywfb3c.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 2;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D1A054, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #D1A054;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .scroll-down svg {
+            width: 40px;
+            height: 40px;
+            fill: #fff;
+        }
+        
+        .canvas-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .video-canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .step-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-left: 4px solid #D1A054;
+        }
+        
+        .step-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .spacer {
+            height: 100vh;
+        }
+        
+        .step-trigger {
+            height: 100vh;
+            opacity: 0;
+        }
+        
+        footer {
+            background-color: #111;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons a {
+            margin: 0 1rem;
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #D1A054;
+            transform: translateY(-5px);
+        }
+        
+        .footer-links {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #D1A054;
+        }
+        
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid #333;
+            border-top-color: #D1A054;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loader-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #D1A054;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            header.sticky {
+                padding: 0.8rem 1rem;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            header.sticky .logo {
+                height: 30px;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .step-content {
+                margin-left: 1rem;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white font-roboto">
+<body>
+    <!-- Preloader -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <p class="loader-text">Loading Noodle Experience...</p>
+    </div>
+
     <!-- Header -->
-    <header class="fixed top-0 w-full bg-gray-900 bg-opacity-80 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <img src="https://i.ibb.co/xS5qCGW/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleMaster Logo" class="h-12">
-            <nav>
-                <a href="#step1" class="mx-4 hover:text-yellow-400 transition">Step I</a>
-                <a href="#step2" class="mx-4 hover:text-yellow-400 transition">Step II</a>
-                <a href="#step3" class="mx-4 hover:text-yellow-400 transition">Step III</a>
-            </nav>
-        </div>
+    <header>
+        <img src="https://i.ibb.co/xS5qCGW4/Pngtree-noodles-logo-4146753-removebg-preview.png" alt="NoodleNest Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#step1">Step 1</a></li>
+                <li><a href="#step2">Step 2</a></li>
+                <li><a href="#step3">Step 3</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://i.ibb.co/cKpwxKSH/Gemini-Generated-Image-fb3cywfb3cywfb3c.jpg');">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative text-center z-10">
-            <h1 class="text-5xl md:text-7xl font-poppins font-bold mb-6 animate-fadeInUp">Unlock the Secrets to Delicious Homemade Noodles!</h1>
-            <p class="text-xl md:text-2xl mb-8 animate-fadeInUp animation-delay-200">Scroll down to start Learning Now</p>
-            <div class="animate-scrollIndicator">
-                <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </div>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Unlock the Secrets to Delicious Homemade Noodles!</h1>
+            <p>Scroll down to start Learning Now</p>
+        </div>
+        <div class="scroll-down">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
         </div>
     </section>
 
-    <!-- Step I -->
-    <section id="step1" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-poppins font-bold text-center mb-6 animate-fadeInUp">Simple Start: Mixing Eggs</h2>
-            <p class="text-lg md:text-xl text-center max-w-3xl mx-auto mb-12 animate-fadeInUp animation-delay-200">Watch as fresh eggs are carefully cracked and whisked together, the first step in creating something delicious. This simple act of combining ingredients is where every great recipe begins!</p>
-            <div class="relative overflow-x-auto no-scrollbar">
-                <div class="flex space-x-4 p-4" id="slider1">
-                    <img src="https://i.ibb.co/yFsx сфер0YT6/1000069876-0001-0.png" alt="Mixing Eggs 1" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/rKFzg0h5/1000069876-0002-0.png" alt="Mixing Eggs 2" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/0Vq2VBR5/1000069876-0003-0.png" alt="Mixing Eggs 3" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/h1XWNvH1/1000069876-0004-0.png" alt="Mixing Eggs 4" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/DfQ97J6M/1000069876-0005-0.png" alt="Mixing Eggs 5" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/qY6F5Dyf/1000069876-0006-0.png" alt="Mixing Eggs 6" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/RkqScMG5/1000069876-0007-0.png" alt="Mixing Eggs 7" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/xKz3hGFM/1000069876-0008-0.png" alt="Mixing Eggs 8" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/dNkXHqc/1000069876-0009-0.png" alt="Mixing Eggs 9" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/pr6nP1gQ/1000069876-0010-0.png" alt="Mixing Eggs 10" class="w-64 h-64 object-cover rounded-lg">
-                    <!-- Add more images as needed -->
-                </div>
-                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider1', -300)">&#10094;</button>
-                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider1', 300)">&#10095;</button>
-            </div>
+    <!-- Step 1 Section -->
+    <div id="step1" class="spacer"></div>
+    <div class="canvas-container">
+        <canvas id="video1Canvas" class="video-canvas"></canvas>
+        <div class="step-content">
+            <h2>Simple start: Mixing eggs</h2>
+            <p>Watch as fresh eggs are carefully cracked and whisked together, the first step in creating something delicious. This simple act of combining ingredients is where every great recipe begins!</p>
         </div>
-    </section>
+    </div>
+    <div class="step-trigger"></div>
 
-    <!-- Step II -->
-    <section id="step2" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-poppins font-bold text-center mb-6 animate-fadeInUp">Dough Magic: Kneading Time</h2>
-            <p class="text-lg md:text-xl text-center max-w-3xl mx-auto mb-12 animate-fadeInUp animation-delay-200">Observe the transformation as simple ingredients become a smooth, workable dough through gentle kneading. This process develops texture and flavor, the heart of our creation.</p>
-            <div class="relative overflow-x-auto no-scrollbar">
-                <div class="flex space-x-4 p-4" id="slider2">
-                    <img src="https://i.ibb.co/hxM4CZy9/1000069946-0001-0.png" alt="Kneading Dough 1" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/38BZS8v/1000069946-0002-0.png" alt="Kneading Dough 2" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/gsL2HPy/1000069946-0003-0.png" alt="Kneading Dough 3" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/SD4gDLQM/1000069946-0004-0.png" alt="Kneading Dough 4" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/jP8f6gz4/1000069946-0005-0.png" alt="Kneading Dough 5" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/sp2P1gd6/1000069946-0006-0.png" alt="Kneading Dough 6" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/BVVvmCFs/1000069946-0007-0.png" alt="Kneading Dough 7" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/Tq74k77W/1000069946-0008-0.png" alt="Kneading Dough 8" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/0jJtP1BK/1000069946-0009-0.png" alt="Kneading Dough 9" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/PZ14sGJx/1000069946-0010-0.png" alt monarch="Kneading Dough 10" class="w-64 h-64 object-cover rounded-lg">
-                    <!-- Add more images as needed -->
-                </div>
-                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider2', -300)">&#10094;</button>
-                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider2', 300)">&#10095;</button>
-            </div>
+    <!-- Step 2 Section -->
+    <div id="step2" class="spacer"></div>
+    <div class="canvas-container">
+        <canvas id="video2Canvas" class="video-canvas"></canvas>
+        <div class="step-content">
+            <h2>Dough Magic: Kneading Time</h2>
+            <p>Observe the transformation as simple ingredients become a smooth, workable dough through gentle kneading. This process develops texture and flavor, the heart of our creation.</p>
         </div>
-    </section>
+    </div>
+    <div class="step-trigger"></div>
 
-    <!-- Step III -->
-    <section id="step3" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-poppins font-bold text-center mb-6 animate-fadeInUp">Plateful of Joy: Serving the Noodles</h2>
-            <p class="text-lg md:text-xl text-center max-w-3xl mx-auto mb-12 animate-fadeInUp animation-delay-200">The perfectly cooked noodles are twirled and artfully arranged on the plate, ready to be enjoyed. A simple yet satisfying moment, promising a delicious bite!</p>
-            <div class="relative overflow-x-auto no-scrollbar">
-                <div class="flex space-x-4 p-4" id="slider3">
-                    <img src="https://i.ibb.co/6cZXG1gN/1000069966-0001-0.png" alt="Serving Noodles 1" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/CkW3SmJ/1000069966-0002-0.png" alt="Serving Noodles 2" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/VYM7hbXD/1000069966-0003-0.png" alt="Serving Noodles 3" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/Fbwc6ZqQ/1000069966-0004-0.png" alt="Serving Noodles 4" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/PskYQP2c/1000069966-0005-0.png" alt="Serving Noodles 5" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/spFg9BVS/1000069966-0006-0.png" alt="Serving Noodles 6" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/p683JynF/1000069966-0007-0.png" alt="Serving Noodles 7" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/VYnwgF5J/1000069966-0008-0.png" alt="Serving Noodles 8" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/gF4pypqz/1000069966-0009-0.png" alt="Serving Noodles 9" class="w-64 h-64 object-cover rounded-lg">
-                    <img src="https://i.ibb.co/3y5DBZR3/1000069966-0010-0.png" alt="Serving Noodles 10" class="w-64 h-64 object-cover rounded-lg">
-                    <!-- Add more images as needed -->
-                </div>
-                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider3', -300)">&#10094;</button>
-                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 p-2 rounded-full" onclick="scrollSlider('slider3', 300)">&#10095;</button>
-            </div>
+    <!-- Step 3 Section -->
+    <div id="step3" class="spacer"></div>
+    <div class="canvas-container">
+        <canvas id="video3Canvas" class="video-canvas"></canvas>
+        <div class="step-content">
+            <h2>Plateful of Joy: Serving the Noodles</h2>
+            <p>The perfectly cooked noodles are twirled and artfully arranged on the plate, ready to be enjoyed. A simple yet satisfying moment, promising a delicious bite!</p>
         </div>
-    </section>
+    </div>
+    <div class="step-trigger"></div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2025 NoodleMaster. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mb-4">
-                <a href="/privacy" class="hover:text-yellow-400 transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-yellow-400 transition">Terms of Service</a>
+    <footer>
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
             </div>
-            <div class="flex justify-center space-x-4">
-                <a href="https://facebook.com" target="_blank"><svg class="w-6 h-6 fill-current hover:text-yellow-400 transition" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-                <a href="https://twitter.com" target="_blank"><svg class="w-6 h-6 fill-current hover:text-yellow-400 transition" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
-                <a href="https://instagram.com" target="_blank"><svg class="w-6 h-6 fill-current hover:text-yellow-400 transition" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.948-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
             </div>
+            <p class="copyright">&copy; 2025 NoodleNest. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.loader-wrapper');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
         // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        document.querySelectorAll('nav a, .scroll-down').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
                     behavior: 'smooth'
                 });
             });
         });
 
-        // Slider scroll function
-        function scrollSlider(sliderId, distance) {
-            const slider = document.getElementById(sliderId);
-            slider.scrollBy({ left: distance, behavior: 'smooth' });
+        // -------- VIDEO FRAME ANIMATION SETUP --------
+        
+        // Define frame sources for each video
+        const video1Frames = [
+            "https://i.ibb.co/yFsx0YT6/1000069876-0001-0.png",
+            "https://i.ibb.co/rKFzg0h5/1000069876-0002-0.png",
+            "https://i.ibb.co/0Vq2VBR5/1000069876-0003-0.png",
+            "https://i.ibb.co/h1XWNvH1/1000069876-0004-0.png",
+            "https://i.ibb.co/DfQ97J6M/1000069876-0005-0.png",
+            "https://i.ibb.co/qY6F5Dyf/1000069876-0006-0.png",
+            "https://i.ibb.co/RkqScMG5/1000069876-0007-0.png",
+            "https://i.ibb.co/xKz3hGFM/1000069876-0008-0.png",
+            "https://i.ibb.co/dNkXHqc/1000069876-0009-0.png",
+            "https://i.ibb.co/pr6nP1gQ/1000069876-0010-0.png",
+            "https://i.ibb.co/dssBdpJ3/1000069876-0011-0.png",
+            "https://i.ibb.co/XkfhnrDR/1000069876-0012-0.png",
+            "https://i.ibb.co/pjSJVjk5/1000069876-0013-0.png",
+            "https://i.ibb.co/DHKB9g8n/1000069876-0014-0.png",
+            "https://i.ibb.co/sJ9KVxxY/1000069876-0015-0.png",
+            "https://i.ibb.co/0j1pgyzk/1000069876-0016-0.png",
+            "https://i.ibb.co/9HXpm3D2/1000069876-0017-0.png",
+            "https://i.ibb.co/fYFkKgNX/1000069876-0018-0.png",
+            "https://i.ibb.co/vx9QZmJP/1000069876-0019-0.png",
+            "https://i.ibb.co/jvVhfrPS/1000069876-0020-0.png",
+            "https://i.ibb.co/Q7hHdMsJ/1000069876-0021-0.png",
+            "https://i.ibb.co/cXQHTFfc/1000069876-0022-0.png",
+            "https://i.ibb.co/bjXLR8QR/1000069876-0023-0.png",
+            "https://i.ibb.co/GfmyghB6/1000069876-0024-0.png",
+            "https://i.ibb.co/wNscYdg4/1000069876-0025-0.png",
+            "https://i.ibb.co/1JtTVL5s/1000069876-0026-0.png",
+            "https://i.ibb.co/n8LnK8Gb/1000069876-0027-0.png",
+            "https://i.ibb.co/3mL9J099/1000069876-0028-0.png",
+            "https://i.ibb.co/LhBtd08T/1000069876-0029-0.png",
+            "https://i.ibb.co/gZ7LFstF/1000069876-0030-0.png"
+        ];
+
+        const video2Frames = [
+            "https://i.ibb.co/hxM4CZy9/1000069946-0001-0.png",
+            "https://i.ibb.co/38BZS8v/1000069946-0002-0.png",
+            "https://i.ibb.co/gsL2HPy/1000069946-0003-0.png",
+            "https://i.ibb.co/SD4gDLQM/1000069946-0004-0.png",
+            "https://i.ibb.co/jP8f6gz4/1000069946-0005-0.png",
+            "https://i.ibb.co/sp2P1gd6/1000069946-0006-0.png",
+            "https://i.ibb.co/BVVvmCFs/1000069946-0007-0.png",
+            "https://i.ibb.co/Tq74k77W/1000069946-0008-0.png",
+            "https://i.ibb.co/0jJtP1BK/1000069946-0009-0.png",
+            "https://i.ibb.co/PZ14sGJx/1000069946-0010-0.png",
+            "https://i.ibb.co/wrjfcR2c/1000069946-0011-0.png",
+            "https://i.ibb.co/LXvctxtG/1000069946-0012-0.png",
+            "https://i.ibb.co/hRmDMYzJ/1000069946-0013-0.png",
+            "https://i.ibb.co/wrNH3MTB/1000069946-0014-0.png",
+            "https://i.ibb.co/QB12MqL/1000069946-0015-0.png",
+            "https://i.ibb.co/V0WbgTCq/1000069946-0016-0.png"
+        ];
+
+        const video3Frames = [
+            "https://i.ibb.co/6cZXG1gN/1000069966-0001-0.png",
+            "https://i.ibb.co/CkW3SmJ/1000069966-0002-0.png",
+            "https://i.ibb.co/VYM7hbXD/1000069966-0003-0.png",
+            "https://i.ibb.co/Fbwc6ZqQ/1000069966-0004-0.png",
+            "https://i.ibb.co/PskYQP2c/1000069966-0005-0.png",
+            "https://i.ibb.co/spFg9BVS/1000069966-0006-0.png",
+            "https://i.ibb.co/p683JynF/1000069966-0007-0.png",
+            "https://i.ibb.co/VYnwgF5J/1000069966-0008-0.png",
+            "https://i.ibb.co/gF4pypqz/1000069966-0009-0.png",
+            "https://i.ibb.co/3y5DBZR3/1000069966-0010-0.png",
+            "https://i.ibb.co/prnXFMNk/1000069966-0011-0.png",
+            "https://i.ibb.co/tTCwjRty/1000069966-0012-0.png",
+            "https://i.ibb.co/ycQngDZk/1000069966-0013-0.png",
+            "https://i.ibb.co/NdYQz2gq/1000069966-0014-0.png",
+            "https://i.ibb.co/JjvzbLSL/1000069966-0015-0.png",
+            "https://i.ibb.co/hRYLGwZ9/1000069966-0016-0.png",
+            "https://i.ibb.co/dJKL77bQ/1000069966-0017-0.png",
+            "https://i.ibb.co/YmhVHWT/1000069966-0018-0.png",
+            "https://i.ibb.co/H0gFC9Y/1000069966-0019-0.png",
+            "https://i.ibb.co/hRP7TdLQ/1000069966-0020-0.png",
+            "https://i.ibb.co/QvFcPHpx/1000069966-0021-0.png",
+            "https://i.ibb.co/ynSXfTG0/1000069966-0022-0.png",
+            "https://i.ibb.co/q38ZZYrL/1000069966-0023-0.png"
+        ];
+
+        // Preload all images
+        function preloadImages(sources, callback) {
+            const images = [];
+            let loadedCount = 0;
+            
+            function imageLoaded() {
+                loadedCount++;
+                if (loadedCount === sources.length) {
+                    callback(images);
+                }
+            }
+            
+            for (let i = 0; i < sources.length; i++) {
+                images[i] = new Image();
+                images[i].onload = imageLoaded;
+                images[i].onerror = imageLoaded; // Handle errors
+                images[i].src = sources[i];
+            }
         }
 
-        // Animation on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate-fadeInUp');
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    element.classList.add('animate-fadeInUp');
-                    element.style.opacity = '1';
-                }
+        // Initialize scroll animations
+        function initScrollAnimation() {
+            // Canvas setup
+            const canvas1 = document.getElementById('video1Canvas');
+            const canvas2 = document.getElementById('video2Canvas');
+            const canvas3 = document.getElementById('video3Canvas');
+            
+            const ctx1 = canvas1.getContext('2d');
+            const ctx2 = canvas2.getContext('2d');
+            const ctx3 = canvas3.getContext('2d');
+            
+            // Set canvas dimensions to match viewport
+            function setCanvasDimensions() {
+                canvas1.width = window.innerWidth;
+                canvas1.height = window.innerHeight;
+                canvas2.width = window.innerWidth;
+                canvas2.height = window.innerHeight;
+                canvas3.width = window.innerWidth;
+                canvas3.height = window.innerHeight;
+            }
+            
+            setCanvasDimensions();
+            window.addEventListener('resize', setCanvasDimensions);
+            
+            // Arrays to store preloaded images
+            let video1Images = [];
+            let video2Images = [];
+            let video3Images = [];
+            
+            // Step content animation
+            const stepContents = document.querySelectorAll('.step-content');
+            
+            // Intersection Observer for step content
+            const contentObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            stepContents.forEach(content => {
+                contentObserver.observe(content);
             });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-
-        // Auto-scroll sliders
-        const sliders = ['slider1', 'slider2', 'slider3'];
-        sliders.forEach(sliderId => {
-            const slider = document.getElementById(sliderId);
-            let direction = 1;
-            setInterval(() => {
-                if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) direction = -1;
-                else if (slider.scrollLeft <= 0) direction = 1;
-                slider.scrollBy({ left: direction * 100, behavior: 'smooth' });
-            }, 3000);
-        });
+            
+            // Scroll animation function
+            function handleScroll() {
+                const scrollTop = window.pageYOffset;
+                
+                // First video animation (starts after hero section)
+                const video1Start = document.getElementById('step1').offsetTop;
+                const video1End = video1Start + window.innerHeight * 2; // Duration of scroll animation
+                
+                if (scrollTop >= video1Start && scrollTop <= video1End) {
+                    const scrollFraction = (scrollTop - video1Start) / (video1End - video1Start);
+                    const frameIndex = Math.min(
+                        video1Frames.length - 1,
+                        Math.floor(scrollFraction * video1Frames.length)
+                    );
+                    
+                    if (video1Images[frameIndex]) {
+                        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+                        drawImageCentered(ctx1, video1Images[frameIndex], canvas1.width, canvas1.height);
+                    }
+                }
+                
+                // Second video animation
+                const video2Start = document.getElementById('step2').offsetTop;
+                const video2End = video2Start + window.innerHeight * 2;
+                
+                if (scrollTop >= video2Start && scrollTop <= video2End) {
+                    const scrollFraction = (scrollTop - video2Start) / (video2End - video2Start);
+                    const frameIndex = Math.min(
+                        video2Frames.length - 1,
+                        Math.floor(scrollFraction * video2Frames.length)
+                    );
+                    
+                    if (video2Images[frameIndex]) {
+                        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+                        drawImageCentered(ctx2, video2Images[frameIndex], canvas2.width, canvas2.height);
+                    }
+                }
+                
+                // Third video animation
+                const video3Start = document.getElementById('step3').offsetTop;
+                const video3End = video3Start + window.innerHeight * 2;
+                
+                if (scrollTop >= video3Start && scrollTop <= video3End) {
+                    const scrollFraction = (scrollTop - video3Start) / (video3End - video3Start);
+                    const frameIndex = Math.min(
+                        video3Frames.length - 1,
+                        Math.floor(scrollFraction * video3Frames.length)
+                    );
+                    
+                    if (video3Images[frameIndex]) {
+                        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+                        drawImageCentered(ctx3, video3Images[frameIndex], canvas3.width, canvas3.height);
+                    }
+                }
+            }
+            
+            // Helper function to draw image centered in canvas
+            function drawImageCentered(ctx, image, canvasWidth, canvasHeight) {
+                const ratio = Math.min(canvasWidth / image.width, canvasHeight / image.height);
+                const centerX = (canvasWidth - image.width * ratio) / 2;
+                const centerY = (canvasHeight - image.height * ratio) / 2;
+                
+                ctx.drawImage(
+                    image,
+                    0, 0, image.width, image.height,
+                    centerX, centerY, image.width * ratio, image.height * ratio
+                );
+            }
+            
+            // Start scroll animation once images are loaded
+            window.addEventListener('scroll', handleScroll);
+            
+            // Preload all images sequentially for better performance
+            preloadImages(video1Frames, (images) => {
+                video1Images = images;
+                console.log('Video 1 frames loaded');
+                
+                preloadImages(video2Frames, (images) => {
+                    video2Images = images;
+                    console.log('Video 2 frames loaded');
+                    
+                    preloadImages(video3Frames, (images) => {
+                        video3Images = images;
+                        console.log('Video 3 frames loaded');
+                        
+                        // Initial render of visible frames
+                        handleScroll();
+                    });
+                });
+            });
+        }
+        
+        // Initialize animation once DOM is loaded
+        document.addEventListener('DOMContentLoaded', initScrollAnimation);
     </script>
 </body>
 </html>
